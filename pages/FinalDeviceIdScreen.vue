@@ -6,29 +6,27 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col>
+          <v-col cols="auto">
             <v-row>
-              <v-col>
-                <v-img :src="images['voteImage']"></v-img>
+              <v-col cols="auto">
+                <img :src="images['voteImage']" alt="">
               </v-col>
-              <v-col>
+              <v-col cols="auto" class="text_final_deviceId">
                 <v-row>
-                  <h3>Новое устройство успешно добавлено</h3>
-                </v-row>
-                <v-row>
-                  <h3>{{store.deviceId}}</h3>
+                  <h3>Новое устройство успешно добавлено:<br>
+                    {{store.device_id}}</h3>
                 </v-row>
               </v-col>
             </v-row>
-            <v-row>
+            <v-row class="button_final_deviceId">
               <NuxtLink to="/DeviceIdScreen">
-                <v-btn>Назад</v-btn>
+                <v-btn color="purple">Назад</v-btn>
               </NuxtLink>
             </v-row>
           </v-col>
@@ -57,3 +55,15 @@ export default{
   }
 }
 </script>
+
+<style lang="scss">
+.text_final_deviceId{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button_final_deviceId{
+  display: flex;
+  flex-direction: row-reverse;
+}
+</style>

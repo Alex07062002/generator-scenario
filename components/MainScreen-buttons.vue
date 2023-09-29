@@ -4,20 +4,29 @@
       <v-row>
         <v-col>
           <v-row>
-        <v-list-item class="mainScreen-NewScenario"><NuxtLink to="/StartScreen">
-          <img @click="" :src="images['newImage']" alt="">
-          {{newScenario}}</NuxtLink></v-list-item>
+            <NuxtLink to="/StartScreen">
+            <v-btn class="button_main_screen">
+          <img :src="images['newImage']" alt="">
+          {{newScenario}}
+            </v-btn>
+            </NuxtLink>
           </v-row>
           <v-row>
-        <v-list-item class="mainScreen-EditScenario"><NuxtLink to="/ExplorerEditScreen">
-          <img @click="" :src="images['editImage']" alt="">
-          {{editScenario}}</NuxtLink></v-list-item>
+            <NuxtLink to="/ExplorerEditScreen">
+            <v-btn class="button_main_screen">
+          <img :src="images['editImage']" alt="">
+          {{editScenario}}
+            </v-btn>
+            </NuxtLink>
           </v-row>
         </v-col>
         <v-col>
-        <v-list-item class="mainScreen-CopyScenario"><NuxtLink to="/ExplorerCopyScreen">
-          <img @click="" :src="images['copyImage']" alt="">
-          {{copyScenario}}</NuxtLink></v-list-item>
+          <NuxtLink to="/ExplorerCopyScreen">
+          <v-btn class="button_main_screen">
+          <img :src="images['copyImage']" alt="">
+          {{copyScenario}}
+          </v-btn>
+          </NuxtLink>
         </v-col>
       </v-row>
     </v-container>
@@ -38,3 +47,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.button_main_screen{
+  min-height: 90px;
+  outline: 3px solid #000000;
+  border-radius: 25px;
+  margin: 10px 10px 10px 10px;
+}
+</style>

@@ -6,32 +6,28 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col>
+          <v-col cols="auto">
             <v-row>
-              <v-col>
-                <v-img :src="images['voteImage']"></v-img>
+              <v-col cols="auto">
+                <img :src="images['voteImage']" alt="">
               </v-col>
-              <v-col>
+              <v-col cols="auto" class="text_final_country">
                 <v-row>
-                  <h3>Новая страна и язык успешно добавлены</h3>
-                </v-row>
-                <v-row>
-                  <h3>{{store.country}}</h3>
-                </v-row>
-                <v-row>
-                  <h3>{{store.language}}</h3>
+                  <h3>Новая страна и язык успешно добавлены:<br>
+                  {{store.country}}<br>
+                    {{store.language}}</h3>
                 </v-row>
               </v-col>
             </v-row>
-            <v-row>
-              <NuxtLink to="/CountryScreen">
-                <v-btn>Назад</v-btn>
+            <v-row class="button_final_country">
+            <NuxtLink to="/CountryScreen">
+                <v-btn color="purple">Назад</v-btn>
               </NuxtLink>
             </v-row>
           </v-col>
@@ -58,3 +54,15 @@ export default{
   }
 }
 </script>
+
+<style lang="scss">
+.text_final_country{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button_final_country{
+  display: flex;
+  flex-direction: row-reverse;
+}
+</style>

@@ -1,3 +1,27 @@
 .menu-bar{
-
+  background-color: #000000;
+  color: #ffffff;
+  min-width: 100vw;
+  max-height: 10vh;
+  display: flex;
+  align-items: center;
 }
+
+@media screen and (min-width: 50vw) and (max-width: 70vw) {
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+}
+
+  @media screen and (max-width: 100px) {
+    .SettingsBar {
+      margin: 0 0 0 0;
+    }
+  }
+@media screen and (max-width: 20vw){
+    .logo {
+      margin: 0 0 0 0;
+    }
+  }
+

@@ -6,23 +6,31 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col cols="8">
-            <v-row>
+          <div>
+          <v-col cols="auto">
+            <v-container>
             <FileExplorerArea :updateFile="getNameFile"/>
-            </v-row>
-            <v-row>
+            </v-container>
+            <v-row class="text_explorer_edit">
               <h5>Выбранный файл:{{editFile}}</h5>
             </v-row>
-            <v-row>
-              <v-btn><NuxtLink to="/GeneralJsonScreen">Продолжить</NuxtLink></v-btn>
+            <v-row class="button_explorer_edit">
+              <div v-if='editFile === ""'>
+              <v-btn class="button_explorer_edit" outlined block="true" color="red">Продолжить</v-btn>
+              </div>
+              <div v-else>
+                <NuxtLink to="/GeneralJsonScreen"><v-btn class="button_explorer_edit" outlined color="green">Продолжить
+               </v-btn></NuxtLink>
+              </div>
             </v-row>
           </v-col>
+          </div>
         </v-row>
       </v-col>
     </div>
@@ -53,3 +61,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+
+.button_explorer_edit{
+  margin-right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.text_explorer_edit{
+  margin: 10px 10px 10px 10px;
+}
+
+</style>

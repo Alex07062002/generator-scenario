@@ -1,35 +1,40 @@
 <template>
   <div>
     <v-container class="startScreen">
-    <v-label for="task-type">{{labelTaskType}}</v-label>
-    <v-text-field class = "textfield"
-      id="task-type"
-      v-model="taskName"
-      placeholder="Введите task-type"
-      trim
+      <v-responsive
+          class="mx-auto"
+          max-width="500"
+      >
+    <v-text-field class = "textfield" label="Введите task-type"
+                  id="task-type"
+                  v-model="taskName"
+                  placeholder="Введите task-type"
+                  variant="underlined"
+                  trim
     ></v-text-field>
-      <v-label for="device_id">{{labelDeviceId}}</v-label>
-      <v-text-field class = "textfield"
+      <v-text-field class = "textfield" label="Введите device-id"
                     id="device-id"
                     v-model="deviceName"
                     placeholder="Введите device_id"
+                    variant="underlined"
                     trim
       ></v-text-field>
-      <v-label for="country">{{labelCountry}}</v-label>
-      <v-text-field class = "textfield"
+      <v-text-field class = "textfield" label="Введите country"
                     id="country"
                     v-model="countryName"
                     placeholder="Введите country"
+                    variant="underlined"
                     trim
       ></v-text-field>
-      <v-label for="language">{{labelLanguage}}</v-label>
-      <v-text-field class = "textfield"
+      <v-text-field class = "textfield" label="Введите language"
                     id="language"
                     v-model="languageName"
                     placeholder="Введите language"
+                    variant="underlined"
                     trim
       ></v-text-field>
-    <v-row class="startScreen-createScenario">
+      </v-responsive>
+      <v-row class="startScreen-createScenario">
       <v-col>
         <v-banner-text class="generatorScenarioName"
                        v-model="generateName"
@@ -37,9 +42,11 @@
                       trim
         ></v-banner-text>
       </v-col>
-      <v-col>
+      <v-col class="button_start_screen">
         <NuxtLink to="/GeneralJsonScreen">
-        <v-btn @click="setNameJson">Создать сценарий</v-btn>
+          <v-btn color="success" @click="setNameJson">
+            Создать сценарий
+          </v-btn>
         </NuxtLink>
       </v-col>
     </v-row>
@@ -48,26 +55,34 @@
 </template>
 
 <script>
-import {placeholder} from "@babel/types";
 import {mapWritableState, mapActions} from "pinia";
 import {useNameJsonFile} from "~/stores/NameJsonFile.js";
 import {useSaveScenario} from "~/stores/Scenario.js";
 
 export default {
 
-  name:"StartScreenTextfields",
-  methods: {placeholder,
+  name:"Textfield",
+  setup(){
+    const store = useSaveScenario();
+    return {store};
+  },
+  methods: {
   ...mapWritableState(useNameJsonFile,['nameJsonFile']),
-  ...mapActions(useNameJsonFile,['$patch']),
-    ...mapWritableState(useSaveScenario,['taskTypeName','deviceIdName','countryName','languageName']),
-    ...mapActions(useSaveScenario, ['$patch']),
+  ...mapActions(useNameJsonFile,{changeNameJsonFile:'$patch'}),
+    ...mapWritableState(useSaveScenario,['task_type','device_id','country','language']),
+    ...mapActions(useSaveScenario, {changeScenario:'$patch'}),
     setNameJson(){
-    this.$patch({
-      nameJsonFile: this.generateScenarioName,
-      taskTypeName: this.taskName.toLowerCase(),
-      deviceIdName: this.deviceName.toUpperCase(),
-      countryName: this.countryName.toUpperCase(),
-      languageName: this.languageName.toLowerCase()
+      this.changeNameJsonFile({
+        nameJsonFile: this.generateScenarioName,
+      });
+
+      this.store.$reset();
+
+      this.changeScenario({
+      task_type: this.taskName.toLowerCase(),
+      device_id: this.deviceName.toUpperCase(),
+      country: this.countryName.toUpperCase(),
+      language: this.countryName.toLowerCase()+"+"+this.languageName.toLowerCase(),
     });
     }
   },
@@ -79,16 +94,24 @@ export default {
   },
   data() {
     return {
-      labelTaskType:"Введите task-type",
-      labelDeviceId:"Введите device-id",
-      labelCountry:"Введите country",
-      labelLanguage:"Введите language",
       deviceName:"",
       countryName:"",
       languageName:"",
-      taskName: '',
+      taskName: "",
       generateName:""
     }
   },
 }
+
 </script>
+
+<style lang="scss">
+.startScreen-createScenario{
+  margin: 30vh 0 0 0;
+}
+.button_start_screen{
+  margin-right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+</style>

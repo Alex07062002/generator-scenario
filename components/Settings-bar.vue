@@ -1,15 +1,23 @@
 <template>
-  <div>
-    <v-list-item vertical class="SettingsBar">
-      <v-list-item-title><NuxtLink to="/TaskTypeScreen"><img onclick="" :src="images['taskTypeImage']" alt="">
-      </NuxtLink></v-list-item-title>
-      <v-list-item-title><NuxtLink to="/DeviceIdScreen"><img  onclick="" :src="images['deviceImage']" alt="">
-      </NuxtLink></v-list-item-title>
-      <v-list-item-title><NuxtLink to="/CountryScreen"><img onclick="" :src="images['countryImage']" alt="">
-      </NuxtLink></v-list-item-title>
-      <v-list-item-title><NuxtLink to="/"><img onclick="" :src="images['scenarioImage']" alt="">
-      </NuxtLink></v-list-item-title>
-    </v-list-item>
+  <div class="SettingsBar">
+    <v-col>
+      <v-row>
+      <NuxtLink to="/TaskTypeScreen"><img :src="images['taskTypeImage']" alt="">
+      </NuxtLink>
+      </v-row>
+      <v-row>
+      <NuxtLink to="/DeviceIdScreen"><img :src="images['deviceImage']" alt="">
+      </NuxtLink>
+      </v-row>
+      <v-row>
+      <NuxtLink to="/CountryScreen"><img :src="images['countryImage']" alt="">
+      </NuxtLink>
+      </v-row>
+      <v-row>
+      <NuxtLink to="/"><img :src="images['scenarioImage']" alt="">
+      </NuxtLink>
+      </v-row>
+    </v-col>
   </div>
 </template>
 

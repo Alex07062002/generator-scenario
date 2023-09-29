@@ -6,16 +6,19 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col cols="8">
+          <v-responsive
+              class="mx-auto"
+              max-width="500"
+          >
+          <v-col cols="auto">
             <v-row>
-              <v-label for="task-type">{{labelDeviceId}}</v-label>
-              <v-text-field class = "textfield"
+              <v-text-field class = "textfield" label="device_id устройства"
                             id="task-type"
                             v-model="deviceIdField"
                             placeholder="Введите device_id"
@@ -23,18 +26,24 @@
               ></v-text-field>
             </v-row>
             <v-row>
-              <v-label for="task-type">{{labelOptionDeviceId}}</v-label>
-              <v-text-field class = "textfield"
+              <v-text-field class = "textfield" label="Доп. название устройства"
                             id="task-type"
                             v-model="optionDeviceIdField"
                             placeholder="Введите дополнительное название device_id"
                             trim
               ></v-text-field>
             </v-row>
-            <v-row>
-              <v-btn @click="saveDeviceId"><NuxtLink to="/FinalDeviceIdScreen">Сохранить</NuxtLink></v-btn>
+            <v-row class="textfield_add_deviceId">
+              <div v-if='deviceIdField === "" || optionDeviceIdField === ""'>
+                <v-btn @click="saveDeviceId" color="red">Сохранить</v-btn>
+              </div>
+              <div v-else>
+                <NuxtLink to="/FinalDeviceIdScreen"><v-btn @click="saveDeviceId" color="green">
+                Сохранить</v-btn></NuxtLink>
+              </div>
             </v-row>
           </v-col>
+          </v-responsive>
         </v-row>
       </v-col>
     </div>
@@ -53,25 +62,33 @@ export default{
 
   data(){
     return{
-      labelDeviceId:"device_id устройства",
       deviceIdField: "",
-      labelOptionDeviceId:"Доп. название устройства",
       optionDeviceIdField: ""
     }
   },
   computed:{
-    ... mapWritableState(useSaveDeviceId,['deviceIdName','optionDeviceIdName'])
-  },
-  mounted(){
+
   },
   methods: {
+    ... mapWritableState(useSaveDeviceId,['device_id','option_device_id']),
     ... mapActions(useSaveDeviceId,['$patch']),
     saveDeviceId(){
       this.$patch({
-        deviceIdName: this.deviceIdField,
-        optionDeviceIdName: this.optionDeviceIdField
+        device_id: this.deviceIdField,
+        option_device_id: this.optionDeviceIdField
       })
     }
   }
 }
 </script>
+
+<style lang="scss">
+.textfield{
+  margin: 10px 10px 10px 10px;
+}
+.textfield_add_deviceId{
+  margin: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+</style>

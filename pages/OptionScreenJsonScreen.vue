@@ -6,20 +6,20 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
-            <v-row>
+          <v-col>
+            <v-row cols="auto">
               <Logo/>
             </v-row>
             <v-row>
               <LineIdBar/>
             </v-row>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="auto">
             <v-row>
-              <JsonTypeNavBar/>
+              <JsonTypeNavBar  :currentPage="'option'"/>
             </v-row>
             <v-row>
               <OptionScreenJsonScreenMainPart/>
@@ -32,9 +32,6 @@
 </template>
 
 <script>
-import LineIdBar from "~/components/LineIdBar.vue";
-import OptionScreenJsonScreenMainPart from "~/components/OptionScreenJsonScreen-MainPart.vue";
-
 export default{
   name:"OptionScreenJsonScreen",
   components:['~/components']

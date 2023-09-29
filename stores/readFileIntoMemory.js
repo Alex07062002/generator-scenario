@@ -1,13 +1,9 @@
-export function readFileIntoMemory (file, callback) {
+export function readFileIntoMemory (file) {
     let reader = new FileReader();
-    reader.onload = function () {
-        callback({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            content: new Uint8Array(this.result)
-        });
-    };
-    reader.readAsArrayBuffer(file);
-    return callback.content;
+    return new Promise(function (resolve) {
+        reader.readAsArrayBuffer(file);
+        reader.onload = function () {
+            resolve(reader.result)
+        }
+    });
 }

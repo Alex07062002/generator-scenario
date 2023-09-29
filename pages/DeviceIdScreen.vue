@@ -6,16 +6,20 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="auto">
             <v-row>
-              <v-list-item><NuxtLink to="/AddDeviceIdScreen"><img @click="" :src="images['deviceImage']" alt="">
-              Добавить новое устройство</NuxtLink></v-list-item>
+              <NuxtLink to="/AddDeviceIdScreen">
+              <v-btn class="button_deviceId_screen">
+               <img @click="" :src="images['deviceImage']" alt="">
+                  Добавить новое устройство
+              </v-btn>
+              </NuxtLink>
             </v-row>
             <v-row>
               <MainScreenTable/>
@@ -41,3 +45,12 @@ export default{
   }
 }
 </script>
+
+<style lang="scss">
+.button_deviceId_screen{
+  min-height: 90px;
+  outline: 3px solid #000000;
+  border-radius: 25px;
+  margin: 10px 10px 10px 10px;
+}
+</style>

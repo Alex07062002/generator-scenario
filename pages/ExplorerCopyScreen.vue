@@ -6,13 +6,13 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
             <Logo/>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="auto">
             <v-row>
               <FileExplorerArea :updateFile="getNameFile"/>
             </v-row>
@@ -24,16 +24,21 @@
             </v-row>
             <v-row>
               <v-col>
-                <h3>Сохранить как:</h3>
-              </v-col>
-              <v-col>
-                <v-text-field id="newNameFile"
+                <v-text-field id="newNameFile" label="Сохранить как:"
                               v-model="saveAs"
+                              variant="underlined"
+                              placeholder="Сохранить как:"
                 ></v-text-field>
               </v-col>
             </v-row>
-            <v-row>
-              <v-btn @click="setNameCopyFile"><NuxtLink to="/GeneralJsonScreen">Продолжить</NuxtLink></v-btn>
+            <v-row class="button_explorer_copy">
+              <div v-if='copyFile === ""'>
+                <v-btn outlined block="true" color="red">Продолжить</v-btn>
+              </div>
+              <div v-else>
+                  <NuxtLink to="/GeneralJsonScreen"><v-btn @click="setNameCopyFile" outlined color="green">Продолжить
+                  </v-btn></NuxtLink>
+                </div>
             </v-row>
           </v-col>
         </v-row>
@@ -57,12 +62,16 @@ export default {
     };
   },
   methods: {
+
     ...mapWritableState(useNameJsonFile,['nameJsonFile']),
     ...mapActions(useNameJsonFile,['$patch']),
     setNameCopyFile(){
       let name = "";
-      if (!this.saveAs.includes(".json")){
+      if (!this.saveAs.includes(".json") && this.saveAs !== ""){
         name = this.saveAs.split('.')[0] + ".json";
+      }
+      else if (this.saveAs === ""){
+        name = this.copyFile;
       }
       else{
         name = this.saveAs;
@@ -77,3 +86,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.button_explorer_copy{
+  margin-right: 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+</style>

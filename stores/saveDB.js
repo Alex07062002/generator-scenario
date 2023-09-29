@@ -16,8 +16,8 @@ export const useSaveCountryLang = defineStore('saveCountryLang', {
 export const useSaveDeviceId = defineStore('saveDeviceId', {
     state: () => {
         return {
-            deviceIdName: "",
-            optionDeviceIdName: ""
+            device_id: "",
+            option_device_id: ""
         }
     },
     getters: {
@@ -29,7 +29,7 @@ export const useSaveDeviceId = defineStore('saveDeviceId', {
 export const useSaveTaskType = defineStore('saveTaskType', {
     state: () => {
         return {
-            taskTypeName: "",
+            task_type: "",
         }
     },
     getters: {
