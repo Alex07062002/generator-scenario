@@ -6,15 +6,15 @@
           <MenuBar/>
         </v-row>
         <v-row>
-          <v-col cols="1">
+          <v-col cols="auto">
             <SettingsBar/>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="auto">
               <Logo/>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="auto">
             <v-row>
-              <JsonTypeNavBar/>
+              <JsonTypeNavBar  :currentPage="'checkText'"/>
             </v-row>
             <v-row>
               <CheckTextScreenJsonScreenMainPart/>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-
+//TODO from checktext to screen json -> load line_id and screen json
 export default{
   name:"CheckTextScreenJsonScreen",
   components:[
