@@ -97,13 +97,7 @@ storeLine.screenshot_cropping === null && storeLine.tap_target_text === null'>
         </div>
         <v-row class="task_command_view_option_screen">
           <v-col>
-            <h5>{</h5>
-            <div v-for="(item) in storeLine.getLineIdScreenOption.split('~')">
-              <div v-if='item !== ""'>
-                <h5>{{'&nbsp;&nbsp;&nbsp;&nbsp;'+item+','}}</h5>
-              </div>
-            </div>
-            <h5>}</h5>
+            <vue-json-pretty :path="'res'" :data="getPreviewLineId"></vue-json-pretty>
           </v-col>
         </v-row>
       </v-col>
@@ -130,9 +124,14 @@ import {useVariantsScreenType} from "~/stores/VariantsScreenType.js";
 import {mapActions, mapWritableState} from "pinia";
 import {useImageState} from "~/stores/ImageObject.js";
 import {readImageIntoMemory} from "~/stores/readImageIntoMemory.js";
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
 
 export default{
   name:"OptionScreenJsonScreenMainPart",
+  components: {
+    VueJsonPretty,
+  },
   data(){
     return{
       screenName: this.storeImage.nameFile,
@@ -167,6 +166,9 @@ export default{
     getScreenshot(){
       return this.screenshot;
     },
+    getPreviewLineId(){
+      return JSON.parse(this.storeLine.getLineIdScreenOption)
+    }
   },
   methods:{
 
@@ -537,7 +539,7 @@ export default{
 
 <style lang="scss">
 .buttonBar_option_screen{
-  max-width: 70vw;
+  max-width: 60vw;
   background-color:orange;
   display: flex;
   align-items: center;
@@ -577,8 +579,7 @@ export default{
 .third_level_columns_option_screen .task_command_view_option_screen{
   min-height: 40vh;
   min-width: 20vw;
-  max-width: 30vw;
-  outline: 3px solid #000000;
+  max-width: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -115,13 +115,7 @@ storeLine.task === "paused"'>
       </div>
       <v-row class="task_command_view_static_screen">
         <v-col>
-        <h5>{</h5>
-        <div v-for="(item) in storeLine.getLineId.split('~')">
-          <div v-if='item !== ""'>
-          <h5>{{'&nbsp;&nbsp;&nbsp;&nbsp;'+item+','}}</h5>
-          </div>
-        </div>
-        <h5>}</h5>
+          <vue-json-pretty :path="'res'" :data="getPreviewLineId"></vue-json-pretty>
         </v-col>
       </v-row>
     </v-col>
@@ -147,9 +141,14 @@ import {mapWritableState, mapActions} from "pinia";
 import {useSaveScenario} from "~/stores/Scenario.js";
 import {useImageState} from "~/stores/ImageObject.js";
 import {readImageIntoMemory} from "~/stores/readImageIntoMemory.js";
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
 
 export default{
   name:"MainStaticJsonScreen",
+  components: {
+    VueJsonPretty,
+  },
   data(){
     return{
       isManualPressed:false,
@@ -163,6 +162,9 @@ export default{
     getManualPaused(){
       return this.context
     },
+    getPreviewLineId(){
+      return JSON.parse(this.storeLine.getLineId)
+    }
   },
   setup(){
     const store = useSaveScenario();
@@ -492,7 +494,8 @@ export default{
 }
 .third_level_columns_static_screen .task_command_view_static_screen{
   min-height: 40vh;
-  outline: 3px solid #000000;
+  min-width: 20vw;
+  max-width: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;

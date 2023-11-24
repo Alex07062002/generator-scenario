@@ -122,13 +122,7 @@
         </div>
         <v-row  class="task_command_view_screen_screen">
           <v-col>
-            <h5>{</h5>
-            <div v-for="(item) in storeLine.getLineIdScreen.split('~')">
-              <div v-if='item !== ""'>
-                <h5>{{'&nbsp;&nbsp;&nbsp;&nbsp;'+item+','}}</h5>
-              </div>
-            </div>
-            <h5>}</h5>
+            <vue-json-pretty :path="'res'" :data="getPreviewLineId"></vue-json-pretty>
           </v-col>
         </v-row>
       </v-col>
@@ -158,11 +152,15 @@ import { reactive, watch } from 'vue'
 import {useMouse, useMousePressed} from '@vueuse/core'
 import {readImageIntoMemory} from "~/stores/readImageIntoMemory.js";
 import {useImageState} from "~/stores/ImageObject.js";
-
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
 
 
 export default {
   name: "ScreenJsonScreenMainPart",
+  components: {
+    VueJsonPretty,
+  },
   /**
    * buffer_task_bufferspi_screen,
    * buffer_variants_screen_type,
@@ -239,6 +237,9 @@ export default {
     getJson() {
       return this.Json;
     },
+    getPreviewLineId(){
+      return JSON.parse(this.storeLine.getLineIdScreen)
+    }
   },
   methods: {
 
@@ -915,7 +916,7 @@ export default {
 
 <style lang="scss">
 .buttonBar_screen_screen{
-  max-width: 70vw;
+  max-width: 60vw;
   background-color:orange;
   display: flex;
   align-items: center;
@@ -955,8 +956,7 @@ export default {
 .third_level_columns_screen_screen .task_command_view_screen_screen{
   min-height: 40vh;
   min-width: 20vw;
-  max-width: 25vw;
-  outline: 3px solid #000000;
+  max-width: 20vw;
   display: flex;
   align-items: center;
   justify-content: center;

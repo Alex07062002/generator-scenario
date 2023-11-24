@@ -2,9 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: false, ssr: false},
   modules:['@pinia/nuxt'],
-  css:["vuetify/styles/main.css",
-    "primevue/resources/themes/lara-light-blue/theme.css"],
+  css:[ "assets/styles/styles.scss?inline", "vuetify/styles/main.css", 'vue-json-pretty/lib/styles.css'],
+  plugins:['plugins/vue-json-pretty'],
   build:{
-    transpile:['vuetify', "primevue"]
-  }
+    transpile:['vuetify']
+  },
 })

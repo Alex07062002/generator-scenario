@@ -19,27 +19,27 @@ export const useLineId = defineStore('lineId', {
         getLineNum:(state)=> state.lineId,
 
         getLineId: (state) =>{
-            return '"line_id": ' + state.lineId + '~ "task": ' + state.task + '~ ' +
-                '"task_command": ' + state.task_command  + (state.tech_comment ? '~ "tech_comment": '+state.tech_comment : "");
+            return '{"line_id": ' + state.lineId + ', "task": "' + state.task + '", ' +
+                '"task_command": "' + state.task_command + (state.tech_comment ? '", "tech_comment": "'+state.tech_comment +'"': '"')+'}';
         },
 
     getLineIdScreen: (state) => {
 
-            return  '"line_id": ' + state.lineId + '~ "task": ' + state.task + '~ ' +
-                '"task_command": ' + state.task_command + (state.tech_comment ? '~ "tech_comment": '+state.tech_comment : "") +
-             (state.path ? '~ "path": "' + state.path + '"' : "");
+            return  '{"line_id": ' + state.lineId + ', "task": "' + state.task + '", ' +
+                '"task_command": "' + state.task_command + (state.tech_comment ? '", "tech_comment": "'+state.tech_comment + '"' : '"') +
+             (state.path ? ', "path": "' + state.path + '"' : "")+'}';
 
     },
 
     getLineIdScreenOption: (state) => {
 
-        return  '"line_id": ' + state.lineId + '~ "task": ' + state.task + '~ ' +
-            '"task_command": ' + state.task_command + (state.tech_comment ? '~ "tech_comment": '+state.tech_comment : "") +
-             (state.path ? '~ "path": "'+ state.path + '"' : "") + (state.OpenCV_device_id ? '~ "OpenCV_device_id": ' + state.OpenCV_device_id : "") +
-             (state.count_repeat ? '~ "count_repeat": ' + state.count_repeat : "") +
-            (state.screenshot_cropping ? '~ "screenshot_cropping": '+state.screenshot_cropping : "") +
-             (state.target_text ? '~ "target_text": ' + state.target_text : "") +
-             (state.tap_target_text ? '~ "tap_target_text": ' + state.tap_target_text : "");
+        return  '{"line_id": ' + state.lineId + ', "task": "' + state.task + '", ' +
+            '"task_command": "' + state.task_command + (state.tech_comment ? '", "tech_comment": "' + state.tech_comment + '"': '"') +
+             (state.path ? ', "path": "'+ state.path + '"' : "") + (state.OpenCV_device_id ? ', "OpenCV_device_id": "' + state.OpenCV_device_id + '"': "") +
+             (state.count_repeat ? ', "count_repeat": ' + state.count_repeat : "") +
+            (state.screenshot_cropping ? ', "screenshot_cropping": "'+state.screenshot_cropping + '"' : "") +
+             (state.target_text ? ', "target_text": "' + state.target_text + '"' : "") +
+             (state.tap_target_text ? ', "tap_target_text": ' + state.tap_target_text + '"' : "")+'}';
 
         }
     },
